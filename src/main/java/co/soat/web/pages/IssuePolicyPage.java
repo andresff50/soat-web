@@ -14,6 +14,33 @@ public class IssuePolicyPage extends PageObject {
     @FindBy(xpath = "//input[contains(@value, 'Consultar Runt')]")
     public WebElementFacade btnConsultVehiclePlate;
 
+    @FindBy(xpath = "//select[contains(@id, 'txtClase')]")
+    public WebElementFacade cbxDisableClass;
+
+    @FindBy(xpath = "//select[contains(@id, 'txtMarca')]")
+    public WebElementFacade cbxDisableBrand;
+
+    @FindBy(xpath = "//select[contains(@id, 'txtLinea')]")
+    public WebElementFacade cbxDisableLine;
+
+    @FindBy(xpath = "//select[contains(@id, 'txtServicio')]")
+    public WebElementFacade cbxDisableService;
+
+    @FindBy(xpath = "//input[contains(@id, 'txtDesMarca')]")
+    public WebElementFacade inputDisableBrandDescription;
+
+    @FindBy(xpath = "//input[contains(@id, 'txtDesLinea')]")
+    public WebElementFacade inputDisableLineDescription;
+
+    @FindBy(xpath = "//input[contains(@id, 'txtModelo')]")
+    public WebElementFacade inputDisableModel;
+
+    @FindBy(xpath = "//input[contains(@id, 'txtCilindraje')]")
+    public WebElementFacade inputDisableEngineDisplacement;
+
+    @FindBy(xpath = "//input[contains(@id, 'txtPasajeros')]")
+    public WebElementFacade inputDisablePassengers;
+
     @FindBy(xpath = "//input[contains(@id, 'txtCapacidad')]")
     public WebElementFacade inputVehicleCapacity;
 
