@@ -8,7 +8,6 @@ import co.soat.web.utils.CommonFunction;
 import co.soat.web.utils.IssuePolicyData;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matchers;
-import static org.hamcrest.Matchers.is;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -36,11 +35,9 @@ public class IssuePolicySteps {
     @Step
     public void fillForm(Integer sheet, Integer column) {
         IssuePolicyData.getIssuePolicyData("data.xlsx", sheet, column);
-        issuePolicyPage.btnIssuePolicy.click();
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputLicensePlate, IssuePolicyData.getLicensePlate());
         issuePolicyPage.btnConsultVehiclePlate.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
-        validateDisableElements();
         fillVehicleDataForm();
         fillDataFromTomador();
         issuePolicyPage.btnCalculate.click();
@@ -56,8 +53,15 @@ public class IssuePolicySteps {
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, 10);
     }
 
+    @Step
+    public void goToIssuePolicy() {
+        issuePolicyPage.btnIssuePolicy.click();
+    }
+
     private void fillVehicleDataForm() {
-        CommonFunction.clearAndEnterValue(issuePolicyPage.inputObservations, "Ninguna");
+        if (issuePolicyPage.inputObservations.isPresent()) {
+            CommonFunction.clearAndEnterValue(issuePolicyPage.inputObservations, "Ninguna");
+        }
     }
 
     private void fillDataFromTomador() {
@@ -79,18 +83,6 @@ public class IssuePolicySteps {
         CommonFunction.selectDropdownValue(issuePolicyPage.cbxMunicipality, IssuePolicyData.getMunicipality());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputEmail, IssuePolicyData.getEmail());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputCellPhone, IssuePolicyData.getCellPhone());
-    }
-
-    private void validateDisableElements() {
-        assertThat(issuePolicyPage.cbxDisableClass.isDisabled(), is(true));
-        assertThat(issuePolicyPage.cbxDisableBrand.isDisabled(), is(true));
-        assertThat(issuePolicyPage.cbxDisableLine.isDisabled(), is(true));
-        assertThat(issuePolicyPage.cbxDisableService.isDisabled(), is(true));
-        assertThat(issuePolicyPage.inputDisableBrandDescription.isDisabled(), is(true));
-        assertThat(issuePolicyPage.inputDisableLineDescription.isDisabled(), is(true));
-        assertThat(issuePolicyPage.inputDisableModel.isDisabled(), is(true));
-        assertThat(issuePolicyPage.inputDisableEngineDisplacement.isDisabled(), is(true));
-        assertThat(issuePolicyPage.inputDisablePassengers.isDisabled(), is(true));
     }
 
     public void validateSuccessfulPolicyCreation() {
