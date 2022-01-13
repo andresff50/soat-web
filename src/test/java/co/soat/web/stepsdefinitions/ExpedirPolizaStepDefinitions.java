@@ -19,6 +19,7 @@ public class ExpedirPolizaStepDefinitions {
 
     @Cuando("yo completo el formulario con la informacion de la hoja {int} y columna {int}")
     public void completoElFormularioConLaInformacionDeLaHojaYColumna(Integer sheet, Integer column) {
+        issuePolicySteps.goToIssuePolicy();
         issuePolicySteps.fillForm(sheet, column);
     }
 
