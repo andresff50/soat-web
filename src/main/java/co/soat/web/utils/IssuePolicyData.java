@@ -36,11 +36,24 @@ public class IssuePolicyData {
     public static void getIssuePolicyData(String documentName, int sheetNumber, int rowNumber) {
         dataDriver = loadDataDriver(documentName, sheetNumber);
         licensePlate = dataDriver.get(rowNumber).get(0);
-        address = dataDriver.get(rowNumber).get(1);
-        phoneType = dataDriver.get(rowNumber).get(2);
-        phoneNumber = dataDriver.get(rowNumber).get(3);
-        email = dataDriver.get(rowNumber).get(4);
-        cellPhone = dataDriver.get(rowNumber).get(5);
+        documentTypeTm = dataDriver.get(rowNumber).get(1);
+        idNumber = dataDriver.get(rowNumber).get(2);
+        idDigit = dataDriver.get(rowNumber).get(3);
+        gender = dataDriver.get(rowNumber).get(4);
+        personType = dataDriver.get(rowNumber).get(5);
+        companyType = dataDriver.get(rowNumber).get(6);
+        occupationCiiu = dataDriver.get(rowNumber).get(7);
+        firstLastName = dataDriver.get(rowNumber).get(8);
+        secondLastName = dataDriver.get(rowNumber).get(9);
+        name = dataDriver.get(rowNumber).get(10);
+        addressTypes = dataDriver.get(rowNumber).get(11);
+        address = dataDriver.get(rowNumber).get(12);
+        phoneType = dataDriver.get(rowNumber).get(13);
+        phoneNumber = dataDriver.get(rowNumber).get(14);
+        department = dataDriver.get(rowNumber).get(15);
+        municipality = dataDriver.get(rowNumber).get(16);
+        email = dataDriver.get(rowNumber).get(17);
+        cellPhone = dataDriver.get(rowNumber).get(18);
     }
 
     public static Map<Integer, Map<Integer, String>> loadDataDriver(String documentName, int sheetNumber) {
