@@ -39,6 +39,7 @@ public class IssuePolicySteps {
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputLicensePlate, IssuePolicyData.getLicensePlate());
         issuePolicyPage.btnConsultVehiclePlate.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
+        fillVehicleDataForm();
         fillDataFromTomador();
         issuePolicyPage.btnCalculate.click();
         //method to validate message
@@ -55,6 +56,10 @@ public class IssuePolicySteps {
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, 10);
         paymentTypePage.btnGenerate.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, 10);
+    }
+
+    private void fillVehicleDataForm() {
+        CommonFunction.clearAndEnterValue(issuePolicyPage.inputObservations, "Ninguna");
     }
 
     private void fillDataFromTomador() {

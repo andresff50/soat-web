@@ -26,6 +26,9 @@ public class IssuePolicyPage extends PageObject {
     @FindBy(xpath = "//select[contains(@id, 'txtPais')]")
     public WebElementFacade cbxCountryOfVehicle;
 
+    @FindBy(xpath = "//input[contains(@id, 'txtObservaciones')]")
+    public WebElementFacade inputObservations;
+
     @FindBy(xpath = "//select[contains(@id, 'tipoDocumento_tm')]")
     public WebElementFacade cbxDocumentTypeTm;
 
