@@ -80,6 +80,7 @@ public class IssuePolicySteps {
         issuePolicyPage.btnCalculate.click();
         issuePolicyPage.btnAccept.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
+        assertThat(issuePolicyPage.lblCorrectDataMessage.getText(), Matchers.containsString("DATOS CORRECTOS"));
         paymentTypePage.btnGenerate.click();
         issuePolicyPage.btnAccept.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
@@ -109,7 +110,7 @@ public class IssuePolicySteps {
         js.executeScript("window.scrollBy(0,250)", "");
         Serenity.takeScreenshot();
         assertThat(resumePage.lblSuccessfulSoatGenerate.getText().trim(), is(messageIssueGenerate));
-        assertThat(resumePage.lblEmailNotification.getText().trim(), Matchers.containsString(messageEmailNotification));
+        assertThat(resumePage.lblEmailNotification.getText().trim(), is(messageEmailNotification));
         js.executeScript("window.scrollBy(0,250)", "");
         Serenity.takeScreenshot();
     }

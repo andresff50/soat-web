@@ -6,7 +6,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl("http://10.158.85.123:32523/login.aspx")
+@DefaultUrl("http://10.158.85.123:32533/login.aspx")
 public class LoginPage extends PageObject {
     @FindBy(xpath = "//input[contains(@id, 'txtUsuario')]")
     public WebElementFacade inputUser;
