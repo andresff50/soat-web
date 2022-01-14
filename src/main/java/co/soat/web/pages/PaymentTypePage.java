@@ -11,7 +11,7 @@ public class PaymentTypePage extends PageObject {
     @FindBy(xpath = "//input[@value='Continuar']")
     public WebElementFacade btnContinue;
 
-    @FindBy(xpath = "//input[@value='Expedir']")
+    @FindBy(xpath = "//input[contains(@value, 'Expedir')]")
     public WebElementFacade btnGenerate;
 
 }

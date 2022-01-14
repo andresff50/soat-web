@@ -122,7 +122,7 @@ public class IssuePolicyPage extends PageObject {
     @FindBy(id = "ctl00_ContentPlaceHolder1_mensaje2")
     public WebElementFacade lblCorrectDataMessage;
 
-    @FindBy(xpath = "//input[contains(@id, 'btnGenerarPoliza')]")
+    @FindBy(xpath = "//input[contains(@id, 'btnExpedir')]")
     public WebElementFacade btnGenerateIssuePolicy;
 
     @FindBy(xpath = "//div[@id='msgBox1641916689844Content']//span")
