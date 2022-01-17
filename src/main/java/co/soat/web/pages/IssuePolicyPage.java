@@ -128,4 +128,53 @@ public class IssuePolicyPage extends PageObject {
     @FindBy(xpath = "//div[@id='msgBox1641916689844Content']//span")
     public WebElementFacade lblResumeIssuePolicy;
 
+    /*Datos del vehiculo*/
+
+    //Clase
+    @FindBy(xpath = "//select[@id='ctl00_ContentPlaceHolder1_txtClase']")
+    public WebElementFacade selectClass;
+
+    //Marca
+    @FindBy(xpath = "//select[@id='ctl00_ContentPlaceHolder1_txtMarca']")
+    public WebElementFacade selectMark;
+
+    //Linea
+    @FindBy(xpath = "//select[@id='ctl00_ContentPlaceHolder1_txtLinea']")
+    public WebElementFacade selectLine;
+
+    //Servicio
+    @FindBy(xpath = "//select[@id='ctl00_ContentPlaceHolder1_txtServicio']")
+    public WebElementFacade selectService;
+
+    //Modelo
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtModelo']")
+    public WebElementFacade inputModel;
+
+    //Cilindraje
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtCilindraje']")
+    public WebElementFacade inputDisplacement;
+
+    //Pasajeros
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtPasajeros']")
+    public WebElementFacade inputPassengers;
+
+    //Capacidad
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtCapacidad']")
+    public WebElementFacade inputCapacity;
+
+    //Motor
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtMotor']")
+    public WebElementFacade inputMotor;
+
+    //Chasis
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtChasis']")
+    public WebElementFacade inputChassis;
+
+    //VIN
+    @FindBy(xpath = "//input[@id='ctl00_ContentPlaceHolder1_txtVIN']")
+    public WebElementFacade inputVIN;
+
+    //Pais
+    @FindBy(xpath = "//select[@id='ctl00_ContentPlaceHolder1_txtPais']")
+    public WebElementFacade selectCountry;
 }
