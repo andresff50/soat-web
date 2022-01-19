@@ -23,7 +23,8 @@ public class IssuePolicySteps {
     private ResumePage resumePage = new ResumePage();
     private final String messageIssueGenerate = "Poliza SOAT generada exitosamente";
     private final String messageEmailNotification = "Correo de notificación enviado correctamente";
-    private final long timeOverlay = 20;
+    private final long timeOverlay = 2;
+    private final String validateMessage = "DATOS CORRECTOS";
 
     @Step
     public void openSoatWebPage() {
@@ -32,33 +33,51 @@ public class IssuePolicySteps {
 
     @Step("Realiza login en la aplicación")
     public void doLogin(String userId, String password) {
-        CommonFunction.clearAndEnterValue(loginPage.inputUser, userId);
-        CommonFunction.clearAndEnterValue(loginPage.inputPassword, password);
-        loginPage.btnLogin.click();
+        try {
+            assertThat(loginPage.inputUser.isPresent(), is(true));
+            assertThat(loginPage.inputPassword.isPresent(), is(true));
+            CommonFunction.clearAndEnterValue(loginPage.inputUser, userId);
+            CommonFunction.clearAndEnterValue(loginPage.inputPassword, password);
+            loginPage.btnLogin.click();
+            CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
+        } catch (Exception e) {
+            //posible escenario, no encuentra el elemento se ha cambiado o la pagina no mostro la ventana de login, esta caida la aplicacion
+        }
+    }
+
+    @Step("Se empieza a completar el formulario para expedir poliza SOAT")
+    public void fillForm(String file, Integer sheet, Integer column) {
+        IssuePolicyData.getIssuePolicyData(file, sheet, column);
+        goToIssuePolicy();
+        searchVehiclePlate();
+        fillVehicleDataForm();
+        fillDataFromTomador();
+        selectPayment();
+        generateIssuePolicy();
     }
 
     @Step("Realiza click para expedir poliza SOAT")
-    public void goToIssuePolicy() {
+    private void goToIssuePolicy() {
         issuePolicyPage.btnIssuePolicy.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Realiza la busqueda de la placa del vehiculo")
-    public void searchVehiclePlate() {
+    private void searchVehiclePlate() {
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputLicensePlate, IssuePolicyData.getLicensePlate());
         issuePolicyPage.btnConsultVehiclePlate.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Se completa la información del vehiculo")
-    public void fillVehicleDataForm() {
+    private void fillVehicleDataForm() {
         if (issuePolicyPage.inputObservations.isPresent()) {
             CommonFunction.clearAndEnterValue(issuePolicyPage.inputObservations, "Ninguna");
         }
     }
 
     @Step("Se completa la informacion del tomador")
-    public void fillDataFromTomador() {
+    private void fillDataFromTomador() {
         CommonFunction.selectDropdownValue(issuePolicyPage.cbxDocumentTypeTm, IssuePolicyData.getDocumentTypeTm());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputIdNumber, IssuePolicyData.getIdNumber());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputIdDigit, IssuePolicyData.getIdDigit());
@@ -80,22 +99,23 @@ public class IssuePolicySteps {
         issuePolicyPage.btnCalculate.click();
         issuePolicyPage.btnAccept.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
-        assertThat(issuePolicyPage.lblCorrectDataMessage.getText(), Matchers.containsString("DATOS CORRECTOS"));
+        assertThat(issuePolicyPage.lblCorrectDataMessage.getText(), Matchers.containsString(validateMessage));
         paymentTypePage.btnGenerate.click();
         issuePolicyPage.btnAccept.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Se selecciona el metodo de pago")
-    public void selectPayment() {
+    private void selectPayment() {
         paymentTypePage.inputCashPayment.click();
         paymentTypePage.btnContinue.waitUntilEnabled().withTimeoutOf(Duration.ofSeconds(10));
+        Serenity.takeScreenshot();
         paymentTypePage.btnContinue.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Se genera la expedicion de poliza SOAT")
-    public void generateIssuePolicy() {
+    private void generateIssuePolicy() {
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
         issuePolicyPage.btnGenerateIssuePolicy.click();
         if (issuePolicyPage.btnAccept.isPresent()) {

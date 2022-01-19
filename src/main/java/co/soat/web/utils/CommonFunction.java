@@ -11,16 +11,24 @@ import static org.hamcrest.Matchers.is;
 public class CommonFunction {
 
     public static void clearAndEnterValue(WebElement element, String value) {
-        if (!value.equals("NA")) {
-            element.clear();
-            element.sendKeys(value);
+        try {
+            if (!value.equals("NA")) {
+                element.clear();
+                element.sendKeys(value);
+            }
+        }catch (Exception e) {
+            //error de elemento no lo encuentra
         }
     }
 
     public static void selectDropdownValue(WebElementFacade element, String value) {
-        if (!value.equals("NA")) {
-            element.selectByVisibleText(value);
-            assertThat(element.getSelectedVisibleTextValue(), is(value));
+        try {
+            if (!value.equals("NA")) {
+                element.selectByVisibleText(value);
+                assertThat(element.getSelectedVisibleTextValue(), is(value));
+            }
+        }catch (Exception e) {
+            //error de elemento no lo encuentra
         }
     }
 

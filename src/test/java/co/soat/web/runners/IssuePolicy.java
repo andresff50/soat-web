@@ -9,5 +9,5 @@ import org.junit.runner.RunWith;
         glue = {"co.soat.web"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
-public class ExpedirPoliza {
+public class IssuePolicy {
 }
