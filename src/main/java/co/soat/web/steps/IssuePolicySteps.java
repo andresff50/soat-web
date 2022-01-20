@@ -7,6 +7,7 @@ import co.soat.web.pages.ResumePage;
 import co.soat.web.utils.CommonFunction;
 import co.soat.web.utils.IssuePolicyData;
 import net.serenitybdd.core.Serenity;
+import net.serenitybdd.screenplay.actions.Scroll;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.JavascriptExecutor;
@@ -57,27 +58,32 @@ public class IssuePolicySteps {
     }
 
     @Step("Realiza click para expedir poliza SOAT")
-    private void goToIssuePolicy() {
+    public void goToIssuePolicy() {
+        JavascriptExecutor js = (JavascriptExecutor) Serenity.getDriver();
+        js.executeScript("window.scrollBy(0,500)", "");
+        Serenity.takeScreenshot();
         issuePolicyPage.btnIssuePolicy.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Realiza la busqueda de la placa del vehiculo")
-    private void searchVehiclePlate() {
+    public void searchVehiclePlate() {
+        Scroll.to(issuePolicyPage.inputLicensePlate);
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputLicensePlate, IssuePolicyData.getLicensePlate());
         issuePolicyPage.btnConsultVehiclePlate.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Se completa la información del vehiculo")
-    private void fillVehicleDataForm() {
+    public void fillVehicleDataForm() {
         if (issuePolicyPage.inputObservations.isPresent()) {
             CommonFunction.clearAndEnterValue(issuePolicyPage.inputObservations, "Ninguna");
         }
     }
 
     @Step("Se completa la informacion del tomador")
-    private void fillDataFromTomador() {
+    public void fillDataFromTomador() {
+        Scroll.to(issuePolicyPage.cbxDocumentTypeTm);
         CommonFunction.selectDropdownValue(issuePolicyPage.cbxDocumentTypeTm, IssuePolicyData.getDocumentTypeTm());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputIdNumber, IssuePolicyData.getIdNumber());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputIdDigit, IssuePolicyData.getIdDigit());
@@ -96,18 +102,27 @@ public class IssuePolicySteps {
         CommonFunction.selectDropdownValue(issuePolicyPage.cbxMunicipality, IssuePolicyData.getMunicipality());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputEmail, IssuePolicyData.getEmail());
         CommonFunction.clearAndEnterValue(issuePolicyPage.inputCellPhone, IssuePolicyData.getCellPhone());
+        Scroll.to(issuePolicyPage.cbxMunicipality);
         issuePolicyPage.btnCalculate.click();
+        Scroll.to(issuePolicyPage.btnAccept);
+        Serenity.takeScreenshot();
         issuePolicyPage.btnAccept.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
+        Scroll.to(paymentTypePage.btnGenerate);
+        Serenity.takeScreenshot();
         assertThat(issuePolicyPage.lblCorrectDataMessage.getText(), Matchers.containsString(validateMessage));
         paymentTypePage.btnGenerate.click();
+        Scroll.to(issuePolicyPage.btnAccept);
+        Serenity.takeScreenshot();
         issuePolicyPage.btnAccept.click();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Se selecciona el metodo de pago")
-    private void selectPayment() {
+    public void selectPayment() {
         paymentTypePage.inputCashPayment.click();
+        Scroll.to(paymentTypePage.btnContinue);
+        Serenity.takeScreenshot();
         paymentTypePage.btnContinue.waitUntilEnabled().withTimeoutOf(Duration.ofSeconds(10));
         Serenity.takeScreenshot();
         paymentTypePage.btnContinue.click();
@@ -115,7 +130,9 @@ public class IssuePolicySteps {
     }
 
     @Step("Se genera la expedicion de poliza SOAT")
-    private void generateIssuePolicy() {
+    public void generateIssuePolicy() {
+        Scroll.to(issuePolicyPage.btnAccept);
+        Serenity.takeScreenshot();
         CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
         issuePolicyPage.btnGenerateIssuePolicy.click();
         if (issuePolicyPage.btnAccept.isPresent()) {
@@ -129,10 +146,11 @@ public class IssuePolicySteps {
         try {
             JavascriptExecutor js = (JavascriptExecutor) Serenity.getDriver();
             js.executeScript("window.scrollBy(0,250)", "");
+            Scroll.to(resumePage.lblEmailNotification);
             Serenity.takeScreenshot();
             assertThat(resumePage.lblSuccessfulSoatGenerate.getText().trim(), is(messageIssueGenerate));
             assertThat(resumePage.lblEmailNotification.getText().trim(), is(messageEmailNotification));
-            js.executeScript("window.scrollBy(0,250)", "");
+            js.executeScript("window.scrollBy(0,300)", "");
             Serenity.takeScreenshot();
         } catch (Exception e) {
             LOGGER.info("Error en la validacion");
