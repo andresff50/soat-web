@@ -10,9 +10,8 @@ import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.JavascriptExecutor;
-
 import java.time.Duration;
-
+import java.util.logging.Logger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -25,6 +24,7 @@ public class IssuePolicySteps {
     private final String messageEmailNotification = "Correo de notificación enviado correctamente";
     private final long timeOverlay = 20;
     private final String validateMessage = "DATOS CORRECTOS";
+    private static final Logger LOGGER = Logger.getLogger(IssuePolicySteps.class.getName());
 
     @Step
     public void openSoatWebPage() {
@@ -41,7 +41,7 @@ public class IssuePolicySteps {
             loginPage.btnLogin.click();
             CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
         } catch (Exception e) {
-            //posible escenario, no encuentra el elemento se ha cambiado o la pagina no mostro la ventana de login, esta caida la aplicacion
+            LOGGER.info("Elemento no encontrado o pagina sin servicio");
         }
     }
 
@@ -134,8 +134,8 @@ public class IssuePolicySteps {
             assertThat(resumePage.lblEmailNotification.getText().trim(), is(messageEmailNotification));
             js.executeScript("window.scrollBy(0,250)", "");
             Serenity.takeScreenshot();
-        }catch (Exception e) {
-            //fallo en la validacion
+        } catch (Exception e) {
+            LOGGER.info("Error en la validacion");
         }
     }
 

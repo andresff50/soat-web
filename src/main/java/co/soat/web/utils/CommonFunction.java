@@ -4,11 +4,13 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
+import java.util.logging.Logger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class CommonFunction {
+    private static final Logger LOGGER = Logger.getLogger(CommonFunction.class.getName());
 
     public static void clearAndEnterValue(WebElement element, String value) {
         try {
@@ -17,7 +19,7 @@ public class CommonFunction {
                 element.sendKeys(value);
             }
         }catch (Exception e) {
-            //error de elemento no lo encuentra
+            LOGGER.info("Elemento no encontrado o pagina sin servicio");
         }
     }
 
@@ -28,7 +30,7 @@ public class CommonFunction {
                 assertThat(element.getSelectedVisibleTextValue(), is(value));
             }
         }catch (Exception e) {
-            //error de elemento no lo encuentra
+            LOGGER.info("Elemento no encontrado o pagina sin servicio");
         }
     }
 
