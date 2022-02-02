@@ -18,8 +18,8 @@ public class CommonFunction {
                 element.clear();
                 element.sendKeys(value);
             }
-        }catch (Exception e) {
-            LOGGER.info("Elemento no encontrado o pagina sin servicio");
+        } catch (Exception e) {
+            LOGGER.info("Elemento no encontrado o deshabilitado");
         }
     }
 
@@ -29,13 +29,24 @@ public class CommonFunction {
                 element.selectByVisibleText(value);
                 assertThat(element.getSelectedVisibleTextValue(), is(value));
             }
-        }catch (Exception e) {
-            LOGGER.info("Elemento no encontrado o pagina sin servicio");
+        } catch (Exception e) {
+            LOGGER.info("Elemento no encontrado o deshabilitado");
         }
     }
 
     public static void waitOverlayToDisappear(WebElementFacade element, long seconds) {
-        element.waitUntilNotVisible().withTimeoutOf(Duration.ofSeconds(seconds));
+        boolean overlayIsPresent = true;
+        while (overlayIsPresent == true) {
+            if (!element.isPresent()) {
+                overlayIsPresent = false;
+            }else {
+                try {
+                    Thread.sleep(seconds);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }

@@ -14,32 +14,35 @@ public class IssuePolicyPage extends PageObject {
     @FindBy(xpath = "//input[contains(@value, 'Consultar Runt')]")
     public WebElementFacade btnConsultVehiclePlate;
 
+    @FindBy(xpath = "//span[contains(@id, 'lblSalidaRunt')]")
+    public WebElementFacade lblMessageRutFailed;
+
     @FindBy(xpath = "//select[contains(@id, 'txtClase')]")
-    public WebElementFacade cbxDisableClass;
+    public WebElementFacade cbxVehicleClass;
 
     @FindBy(xpath = "//select[contains(@id, 'txtMarca')]")
-    public WebElementFacade cbxDisableBrand;
+    public WebElementFacade cbxVehicleBrand;
 
     @FindBy(xpath = "//select[contains(@id, 'txtLinea')]")
-    public WebElementFacade cbxDisableLine;
+    public WebElementFacade cbxVehicleLine;
 
     @FindBy(xpath = "//select[contains(@id, 'txtServicio')]")
-    public WebElementFacade cbxDisableService;
+    public WebElementFacade cbxVehicleService;
 
     @FindBy(xpath = "//input[contains(@id, 'txtDesMarca')]")
-    public WebElementFacade inputDisableBrandDescription;
+    public WebElementFacade inputVehicleBrandDescription;
 
     @FindBy(xpath = "//input[contains(@id, 'txtDesLinea')]")
-    public WebElementFacade inputDisableLineDescription;
+    public WebElementFacade inputVehicleLineDescription;
 
     @FindBy(xpath = "//input[contains(@id, 'txtModelo')]")
-    public WebElementFacade inputDisableModel;
+    public WebElementFacade inputVehicleModel;
 
     @FindBy(xpath = "//input[contains(@id, 'txtCilindraje')]")
-    public WebElementFacade inputDisableEngineDisplacement;
+    public WebElementFacade inputVehicleEngineDisplacement;
 
     @FindBy(xpath = "//input[contains(@id, 'txtPasajeros')]")
-    public WebElementFacade inputDisablePassengers;
+    public WebElementFacade inputVehiclePassengers;
 
     @FindBy(xpath = "//input[contains(@id, 'txtCapacidad')]")
     public WebElementFacade inputVehicleCapacity;

@@ -6,10 +6,19 @@ import java.util.TreeMap;
 public class IssuePolicyData {
     private static Map<Integer, Map<Integer, String>> dataDriver = new TreeMap<>();
     private static String licensePlate;
-    private static String vehicleCapacity;
-    private static String vehicleMotor;
-    private static String vehicleChassis;
+    private static String vehicleCLass;
+    private static String vehicleBrand;
+    private static String vehicleLine;
+    private static String vehicleService;
+    private static String model;
+    private static String displacement;
+    private static String vehiclePassengers;
+    private static String capacity;
+    private static String motor;
+    private static String chassis;
+    private static String vin;
     private static String countryOfVehicle;
+
     private static String documentTypeTm;
     private static String gender;
     private static String personType;
@@ -36,24 +45,37 @@ public class IssuePolicyData {
     public static void getIssuePolicyData(String documentName, int sheetNumber, int rowNumber) {
         dataDriver = loadDataDriver(documentName, sheetNumber);
         licensePlate = dataDriver.get(rowNumber).get(0);
-        documentTypeTm = dataDriver.get(rowNumber).get(1);
-        idNumber = dataDriver.get(rowNumber).get(2);
-        idDigit = dataDriver.get(rowNumber).get(3);
-        gender = dataDriver.get(rowNumber).get(4);
-        personType = dataDriver.get(rowNumber).get(5);
-        companyType = dataDriver.get(rowNumber).get(6);
-        occupationCiiu = dataDriver.get(rowNumber).get(7);
-        firstLastName = dataDriver.get(rowNumber).get(8);
-        secondLastName = dataDriver.get(rowNumber).get(9);
-        name = dataDriver.get(rowNumber).get(10);
-        addressTypes = dataDriver.get(rowNumber).get(11);
-        address = dataDriver.get(rowNumber).get(12);
-        phoneType = dataDriver.get(rowNumber).get(13);
-        phoneNumber = dataDriver.get(rowNumber).get(14);
-        department = dataDriver.get(rowNumber).get(15);
-        municipality = dataDriver.get(rowNumber).get(16);
-        email = dataDriver.get(rowNumber).get(17);
-        cellPhone = dataDriver.get(rowNumber).get(18);
+        vehicleCLass = dataDriver.get(rowNumber).get(1);
+        vehicleBrand = dataDriver.get(rowNumber).get(2);
+        vehicleLine = dataDriver.get(rowNumber).get(3);
+        vehicleService = dataDriver.get(rowNumber).get(4);
+        model = dataDriver.get(rowNumber).get(5);
+        displacement = dataDriver.get(rowNumber).get(6);
+        vehiclePassengers = dataDriver.get(rowNumber).get(7);
+        capacity = dataDriver.get(rowNumber).get(8);
+        motor = dataDriver.get(rowNumber).get(9);
+        chassis = dataDriver.get(rowNumber).get(10);
+        vin = dataDriver.get(rowNumber).get(11);
+        countryOfVehicle = dataDriver.get(rowNumber).get(12);
+
+        documentTypeTm = dataDriver.get(rowNumber).get(13);
+        idNumber = dataDriver.get(rowNumber).get(14);
+        idDigit = dataDriver.get(rowNumber).get(15);
+        gender = dataDriver.get(rowNumber).get(16);
+        personType = dataDriver.get(rowNumber).get(17);
+        companyType = dataDriver.get(rowNumber).get(18);
+        occupationCiiu = dataDriver.get(rowNumber).get(19);
+        firstLastName = dataDriver.get(rowNumber).get(20);
+        secondLastName = dataDriver.get(rowNumber).get(21);
+        name = dataDriver.get(rowNumber).get(22);
+        addressTypes = dataDriver.get(rowNumber).get(23);
+        address = dataDriver.get(rowNumber).get(24);
+        phoneType = dataDriver.get(rowNumber).get(25);
+        phoneNumber = dataDriver.get(rowNumber).get(26);
+        department = dataDriver.get(rowNumber).get(27);
+        municipality = dataDriver.get(rowNumber).get(28);
+        email = dataDriver.get(rowNumber).get(29);
+        cellPhone = dataDriver.get(rowNumber).get(30);
     }
 
     public static Map<Integer, Map<Integer, String>> loadDataDriver(String documentName, int sheetNumber) {
@@ -65,16 +87,48 @@ public class IssuePolicyData {
         return licensePlate;
     }
 
-    public static String getVehicleCapacity() {
-        return vehicleCapacity;
+    public static String getVehicleCLass() {
+        return vehicleCLass;
     }
 
-    public static String getVehicleMotor() {
-        return vehicleMotor;
+    public static String getVehicleBrand() {
+        return vehicleBrand;
     }
 
-    public static String getVehicleChassis() {
-        return vehicleChassis;
+    public static String getVehicleLine() {
+        return vehicleLine;
+    }
+
+    public static String getVehicleService() {
+        return vehicleService;
+    }
+
+    public static String getModel() {
+        return model;
+    }
+
+    public static String getDisplacement() {
+        return displacement;
+    }
+
+    public static String getVehiclePassengers() {
+        return vehiclePassengers;
+    }
+
+    public static String getCapacity() {
+        return capacity;
+    }
+
+    public static String getMotor() {
+        return motor;
+    }
+
+    public static String getChassis() {
+        return chassis;
+    }
+
+    public static String getVin() {
+        return vin;
     }
 
     public static String getCountryOfVehicle() {

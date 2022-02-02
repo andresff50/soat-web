@@ -23,7 +23,7 @@ public class IssuePolicySteps {
     private ResumePage resumePage = new ResumePage();
     private final String messageIssueGenerate = "Poliza SOAT generada exitosamente";
     private final String messageEmailNotification = "Correo de notificación enviado correctamente";
-    private final long timeOverlay = 20;
+    private final long timeOverlay = 10;
     private final String validateMessage = "DATOS CORRECTOS";
     private static final Logger LOGGER = Logger.getLogger(IssuePolicySteps.class.getName());
 
@@ -54,7 +54,7 @@ public class IssuePolicySteps {
         fillVehicleDataForm();
         fillDataFromTomador();
         selectPayment();
-        generateIssuePolicy();
+        //generateIssuePolicy();
     }
 
     @Step("Realiza click para expedir poliza SOAT")
@@ -63,7 +63,6 @@ public class IssuePolicySteps {
         js.executeScript("window.scrollBy(0,500)", "");
         Serenity.takeScreenshot();
         issuePolicyPage.btnIssuePolicy.click();
-        CommonFunction.waitOverlayToDisappear(loginPage.lblOverlay, timeOverlay);
     }
 
     @Step("Realiza la busqueda de la placa del vehiculo")
@@ -76,9 +75,23 @@ public class IssuePolicySteps {
 
     @Step("Se completa la información del vehiculo")
     public void fillVehicleDataForm() {
+        if (issuePolicyPage.lblMessageRutFailed.isPresent()) rutSearchFail();
         if (issuePolicyPage.inputObservations.isPresent()) {
             CommonFunction.clearAndEnterValue(issuePolicyPage.inputObservations, "Ninguna");
         }
+        CommonFunction.clearAndEnterValue(issuePolicyPage.inputCapacity, IssuePolicyData.getCapacity());
+        CommonFunction.clearAndEnterValue(issuePolicyPage.inputMotor, IssuePolicyData.getMotor());
+        CommonFunction.clearAndEnterValue(issuePolicyPage.inputChassis, IssuePolicyData.getChassis());
+        CommonFunction.clearAndEnterValue(issuePolicyPage.inputVIN, IssuePolicyData.getVin());
+        CommonFunction.clearAndEnterValue(issuePolicyPage.cbxCountryOfVehicle, IssuePolicyData.getCountryOfVehicle());
+        Serenity.takeScreenshot();
+    }
+
+    @Step("Se muestra mensaje 'NO FUE POSIBLE REALIZAR LA CONSULTA AL RUNT, CONTINUE EL PROCESO DE EXPEDICIÓN CON BASE EN LA TARJETA DE PROPIEDAD'")
+    public void rutSearchFail() {
+        Scroll.to(issuePolicyPage.cbxVehicleClass);
+        Serenity.takeScreenshot();
+        Serenity.done();
     }
 
     @Step("Se completa la informacion del tomador")
